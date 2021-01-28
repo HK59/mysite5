@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.dao.UserDao;
+import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -18,6 +19,10 @@ public class UserController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private UserService userService; 
+
 
 	// 회원가입 폼
 	@RequestMapping(value = "/joinForm", method = { RequestMethod.GET, RequestMethod.POST })
@@ -32,8 +37,10 @@ public class UserController {
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("/user/join");
 		System.out.println(userVo.toString());
+		
 
-		userDao.insert(userVo);
+		//int count = userDao.insert(userVo); --> Dao한테 바로 시켰음 
+		
 		return "user/joinOk";
 
 	}
@@ -43,26 +50,27 @@ public class UserController {
 	public String loginForm() {
 		System.out.println("/user/loginForm");
 		return "/user/loginForm";
-		
+	}
+	
 	//로그인
-		@RequestMapping(value="/login" , method= {RequestMethod.GET ,RequestMethod.POST})
-		public String login(@ModelAttribute UserVo userVo, HttpSession session) {
-			System.out.println("/user/login");		
-			System.out.println("login userVo : "+userVo);
-			
-			UserVo authUser = userDao.selectUser(userVo); //id, password값으로 해당 no,name 불러옴
-			//System.out.println("controller-->" + authUser.toString());
-			
-			if(authUser == null) {//실패했을때
-				//로그인폼 result = fail
-				System.out.println("로그인실패");
-				return "redirect:/user/loginForm?result=fail";
-			}else{//성공했을때			
-				System.out.println("로그인 성공-->" + authUser.toString());	
-				session.setAttribute("authUser", authUser); //로그인한 정보 header에 표시하기위에 정보 꺼내서야함		
-				return "redirect:/";			
-			}
+	@RequestMapping(value="/login" , method= {RequestMethod.GET, RequestMethod.POST})
+	public String login(@ModelAttribute UserVo userVo) {
+		System.out.println("/user/login");		
+		System.out.println("login userVo : "+userVo);
+		
+		//UserVo authUser = userDao.selectUser(userVo); //id, password값으로 해당 no,name 불러옴 -> Service로 이동 
+		//System.out.println("controller-->" + authUser.toString());
+		
+		/*if(authUser == null) {//실패했을때
+			//로그인폼 result = fail
+			System.out.println("로그인실패");
+			return "redirect:/user/loginForm?result=fail";
+		}else{//성공했을때			
+			System.out.println("로그인 성공-->" + authUser.toString());	
+			session.setAttribute("authUser", authUser); //로그인한 정보 header에 표시하기위에 정보 꺼내서야함-->서비스로 이동 */		
+			return "redirect:/";			
 		}
+	
 
 	// 로그아웃
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
@@ -97,8 +105,8 @@ public class UserController {
 
 		// 수정된 값을 다른곳에도 불러와야함 (이름)
 		// 세션에 저장된 authUser값을 불러와서 이름만 변경
-		UserVo authVo = (UserVo) session.getAttribute("authUser");
-		authVo.setName(userVo.getName());
+		/*UserVo authVo = (UserVo) session.getAttribute("authUser");
+		authVo.setName(userVo.getName());//-->서비스로 옮김*/  
 
 		return "redirect:/"; // 메인으로 갔을때 이름 변경되어야함
 	}

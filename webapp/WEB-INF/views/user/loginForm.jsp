@@ -62,7 +62,7 @@
 
 			<div id="user">
 				<div id="loginForm">
-					<form action=mysite5/user/login" method="post">
+					<form action="${pageContext.request.contextPath}/user/login" method="post">
 
 						<!-- 아이디 -->
 						<div class="form-group">
