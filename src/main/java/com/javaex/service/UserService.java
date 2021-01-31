@@ -58,4 +58,11 @@ public class UserService {
 		return "redirect:/";
 		
 	}
+	
+	//로그아웃
+	public String logout(HttpSession session) {
+		session.removeAttribute("authUser");
+		session.invalidate();
+		return "redirect:/";
+	}
 	}

@@ -52,7 +52,7 @@ public class UserDao {
 			
 			sqlSession.update("user.modify", userVo);
 		}
-
+		
 
 }
 	

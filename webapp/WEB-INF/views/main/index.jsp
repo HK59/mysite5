@@ -55,7 +55,7 @@
 
 			<div id="index">
 
-				<img id="profile-img" src=${PageContext.request.contextPath}"/mysite5/asset/image/profile.jpg">
+				<img id="profile-img" src="/mysite5/asset/image/profile.jpg">
 
 				<div id="greetings">
 					<p class="text-xlarge">

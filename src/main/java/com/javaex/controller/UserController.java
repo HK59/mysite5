@@ -77,8 +77,8 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("/user/logout");
 
-		session.removeAttribute("authUser");
-		session.invalidate();
+		//session.removeAttribute("authUser");
+		//session.invalidate();
 
 		return "redirect:/";
 	}
@@ -88,9 +88,9 @@ public class UserController {
 	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("/user/modifyForm");
 
-		UserVo authVo = (UserVo) session.getAttribute("authUser");
+	//	UserVo authVo = (UserVo) session.getAttribute("authUser");
 
-		model.addAttribute("userVo", userDao.selectOne(authVo.getNo()));
+		//model.addAttribute("userVo", userDao.selectOne(authVo.getNo()));
 
 		return "user/modifyForm";
 	}
