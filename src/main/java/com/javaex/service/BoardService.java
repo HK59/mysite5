@@ -2,6 +2,8 @@ package com.javaex.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +23,18 @@ public class BoardService {
 	private BoardService boardService;
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired //no 값 불러오기 위해 
+	private HttpSession session; 
 	
-	// http://localhost:8088/mysite5/board/list
-	// List
-	public String getlist(Model model) {
-		System.out.println("boardList");
-		List<BoardVo> boardList = boardDao.getList();
-		model.addAttribute(boardList);
-		return "list";
+	
+	// http://localhost:8088/mysite5/board/postedlist
+	// 글 리스트
+	@SuppressWarnings("unchecked")
+	public List<BoardVo> getList(){
+		System.out.println("boardService getList");
+		
+		return boardDao.selectList();
+		
 	}
 
 	// http://localhost:8088/mysite5/board/post
@@ -75,4 +81,6 @@ public class BoardService {
 
 		return boardDao.remove(no);
 	}
+
+
 	}

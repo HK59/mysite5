@@ -6,21 +6,31 @@
 	<!-- 게시판 리스트 -->
 	<select id="selectList" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			select board1.*,users.no
-			from board1 inner join users
-			on board1.no = users.no
-			order by board1.no asc;
+			select  bo1.no,
+        			bo1.title,
+                    bo1.content,
+       				bo1.hit,
+                    bo1.user_no as userno,
+        			us.name as name
+			from board1 bo1 left join users us
+			on bo1.user_no = us.no
+			order by bo1.no asc
 		]]>
 	</select>
 	
 	<!-- 게시글 -->
 	<select id="selectPost" parameterType="int" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			select board1.*,users.no
-			from board1 inner join users
-			on board1.no = users.no
-			order by board1.no asc;
-			where board1.no = #{no}
+			select  bo.no,
+        		bo.title,
+        		bo.content,
+        		bo.hit,
+        		to_char(bo.eg_date, 'YYYY-MM-DD HH24:MI:SS') regdate,
+        		bo.user_no as userno,
+        		us.name name
+		from board bo left join users us
+		on bo.user_no = us.no
+		where bo.no = #{no}
 		]]>
 	</select>
 	

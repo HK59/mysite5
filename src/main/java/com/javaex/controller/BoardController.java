@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +18,26 @@ import com.javaex.vo.BoardVo;
 @RequestMapping(value = "/board")
 public class BoardController {
 
+
+	
 	@Autowired
 	private BoardDao boardDao;
+
 	
+	@Autowired
 	private BoardService boardService;
 
-	// http://localhost:8088/mysite5/board/list
+	// http://localhost:8088/mysite5/board/getList
 	// 글 리스트
-	@RequestMapping(value = "/postedList", method = { RequestMethod.GET, RequestMethod.POST})
-	public String list(BoardVo boardVo, Model model) {
-		System.out.println("board_postedList");
+	@RequestMapping(value = "/getList", method = { RequestMethod.GET, RequestMethod.POST})
+	public String getlist(Model model) {
+		System.out.println("get_board_List");
+		
+		//데이터 보내기
+		model.addAttribute("boardList", boardService.getList());
+		
 
-		return "board/postedList";
+		return "board/getList";
 	}
 
 	// http://localhost:8088/mysite5/board/post

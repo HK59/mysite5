@@ -20,20 +20,18 @@ public class BoardDao {
 	@Autowired
 	private HttpSession session;
 
-	// http://localhost:8088/mysite5/board/postedList
+	// http://localhost:8088/mysite5/board/getList
 	// 글 리스트
-	public List<BoardVo> postList(Model model) {
-		System.out.println("boardDao: postedList");
+	public List<BoardVo> selectList() {
+		System.out.println("boardDao: getList");
 
-		return sqlSession.selectList("board.postedList");
+		return sqlSession.selectList("board.selectList");
 	}
 
 	// http://localhost:8088/mysite5/board/post
 	// 글 읽기 --> 1개의 글 읽기
 	public BoardVo selectPost(int no) {
 		System.out.println("board dao : selectPost");
-		Object boardVo = null;
-		System.out.println(boardVo.toString());
 
 		return sqlSession.selectOne("board.selectPost", no);
 	}
