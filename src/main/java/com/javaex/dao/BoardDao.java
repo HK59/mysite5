@@ -37,10 +37,10 @@ public class BoardDao {
 	}
 
 	// 조회수 +1
-	public int updateHit(BoardVo boardVo) {
+	public int updateHit(int no) {
 		System.out.println("boardDao : count hit");
 
-		return sqlSession.update("board.coutHit", boardVo);
+		return sqlSession.update("board.updateHit", no);
 	}
 
 	//http:localhost:8088/mysite5/board/savePost
@@ -69,11 +69,9 @@ public class BoardDao {
 			return sqlSession.delete("board.remove", no);
 		}
 
-		public List<BoardVo> getList() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	
 
+		
 		
 
 

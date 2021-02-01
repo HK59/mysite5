@@ -49,27 +49,27 @@ public class UserController {
 	@RequestMapping(value= "/loginForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginForm() {
 		System.out.println("/user/loginForm");
+		//로그인 성공
 		return "/user/loginForm";
 	}
 	
 	//로그인
 	@RequestMapping(value="/login" , method= {RequestMethod.GET, RequestMethod.POST})
-	public String login(@ModelAttribute UserVo userVo) {
+	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("/user/login");		
 		System.out.println("login userVo : "+userVo);
 		
-		//UserVo authUser = userDao.selectUser(userVo); //id, password값으로 해당 no,name 불러옴 -> Service로 이동 
-		//System.out.println("controller-->" + authUser.toString());
-		
-		/*if(authUser == null) {//실패했을때
-			//로그인폼 result = fail
-			System.out.println("로그인실패");
+		UserVo authUser = userService.login(userVo);
+		//로그인 성공
+		if(authUser != null) {//로그인 성공
+			session.setAttribute("authUser", authUser);
+			return"redirect:/";
+		}else {
+			//로그인 실패
+			//로그인 -->result = fail
 			return "redirect:/user/loginForm?result=fail";
-		}else{//성공했을때			
-			System.out.println("로그인 성공-->" + authUser.toString());	
-			session.setAttribute("authUser", authUser); //로그인한 정보 header에 표시하기위에 정보 꺼내서야함-->서비스로 이동 */		
-			return "redirect:/";			
 		}
+	}
 	
 
 	// 로그아웃
@@ -77,8 +77,8 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("/user/logout");
 
-		//session.removeAttribute("authUser");
-		//session.invalidate();
+		session.removeAttribute("authUser");
+		session.invalidate();
 
 		return "redirect:/";
 	}

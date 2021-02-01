@@ -47,10 +47,10 @@ public class UserDao {
 		}
 		
 		//수정
-		public void modify(UserVo userVo) {
+		public int modify(UserVo userVo) {
 			System.out.println("modify" + userVo);
 			
-			sqlSession.update("user.modify", userVo);
+			return sqlSession.update("user.modify", userVo);
 		}
 		
 

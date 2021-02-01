@@ -37,17 +37,21 @@ public class BoardService {
 		
 	}
 
-	// http://localhost:8088/mysite5/board/post
-	// 글읽기-->카운트증가
+	// http://localhost:8088/mysite5/board/read?no=2
+	// 글읽기//count 올라가야함
+	
 	public BoardVo read(int no) {
 		System.out.println("Service_boardread");
-		
-
 		BoardVo count = boardDao.selectPost(no);
+		boardDao.updateHit(no);
+		
+		
 		
 		return count;
+		
 	}
-
+	
+	
 	//http:localhost:8088/mysite5/board/savePost
 	// 글 저장
 	public BoardVo insert(BoardVo boardVo) {
@@ -72,7 +76,7 @@ public class BoardService {
 	public int updatePost(BoardVo boardVo) {
 		System.out.println("boardService : edit the post");
 
-		return boardDao.updateHit(boardVo);
+		return boardDao.editPost(boardVo);
 	}
 
 	//http:localhost:8088/mysite5/board/remove

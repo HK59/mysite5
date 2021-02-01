@@ -1,7 +1,5 @@
 package com.javaex.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javaex.dao.BoardDao;
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
 
@@ -18,10 +15,6 @@ import com.javaex.vo.BoardVo;
 @RequestMapping(value = "/board")
 public class BoardController {
 
-
-	
-	@Autowired
-	private BoardDao boardDao;
 
 	
 	@Autowired
@@ -40,7 +33,7 @@ public class BoardController {
 		return "board/getList";
 	}
 
-	// http://localhost:8088/mysite5/board/post
+	// http://localhost:8088/mysite5/board/read?no=2
 	//글 읽기
 	@RequestMapping(value="/read", method= {RequestMethod.GET, RequestMethod.POST})
 	public String read(@RequestParam("no") int no, Model model) {
@@ -57,18 +50,18 @@ public class BoardController {
 		public String postForm() {
 			System.out.println("postForm");
 			
-			return "board/postForm";
+			return "board/getList";
 		}	
 		
 	//http:localhost:8088/mysite5/board/savePost
-	//글 저장 
+	//글 저장 //글 저장되고 조회수가 1개 올라가야함-> 이건 서비스의 임무 
 		@RequestMapping(value="/savePost", method= {RequestMethod.GET, RequestMethod.POST} )
 		public String insert(@ModelAttribute BoardVo boardVo) {
 			System.out.println("savePost");
 			
 			boardService.insert(boardVo);
 			
-			return "redirect:/board/savePost";
+			return "redirect:/board/getList";
 		}
 		
 	//http:localhost:8088/mysite5/board/editForm
