@@ -77,7 +77,7 @@ public class BoardController {
 		public String edit(@ModelAttribute BoardVo boardVo) {
 			System.out.println("edit");
 			
-			boardService.edit(boardVo);
+			boardService.updatePost(boardVo);
 			
 			return "redirect:/board/list";
 		}
@@ -93,5 +93,5 @@ public class BoardController {
 			return "redirect:/board/postedList";
 		}
 	}
-}
+
 

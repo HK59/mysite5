@@ -18,9 +18,9 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	@Autowired
-	BoardService boardService;
+	private BoardService boardService;
 	@Autowired
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	// http://localhost:8088/mysite5/board/list
 	// List
