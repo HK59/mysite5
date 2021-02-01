@@ -54,13 +54,7 @@ public class BoardDao {
 		}
 		
 		
-	//http:localhost:8088/mysite5/board/editForm
-	// 글 수정 폼
-	public int editForm(BoardVo boardVo) {
-	System.out.println("BoadDao: editForm");
-	
-	return sqlSession.
-	}
+
 	//http:localhost:8088/mysite5/board/edit
 	//글 수정
 		public int editPost(BoardVo boardVo) {
