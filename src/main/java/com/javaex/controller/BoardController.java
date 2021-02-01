@@ -44,8 +44,9 @@ public class BoardController {
 	//글 읽기
 	@RequestMapping(value="/read", method= {RequestMethod.GET, RequestMethod.POST})
 	public String read(@RequestParam("no") int no, Model model) {
-		System.out.println("board_read");
-		
+		System.out.println("controller_board_read");
+		//데이터보내기
+		model.addAttribute("post", boardService.read(no));
 		
 		return "board/read";
 	}

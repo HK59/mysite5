@@ -6,12 +6,13 @@
 	<!-- 게시판 리스트 -->
 	<select id="selectList" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			select  bo1.no,
-        			bo1.title,
-                    bo1.content,
-       				bo1.hit,
-                    bo1.user_no as userno,
-        			us.name as name
+		select  bo1.no,
+        		bo1.title,
+                bo1.content,
+       			bo1.hit,
+       			to_char(bo1.regdate, 'YYYY-MM-DD HH24:MI:SS') regdate,
+                bo1.user_no as userno,
+        		us.name as name
 			from board1 bo1 left join users us
 			on bo1.user_no = us.no
 			order by bo1.no asc
@@ -21,23 +22,23 @@
 	<!-- 게시글 -->
 	<select id="selectPost" parameterType="int" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			select  bo.no,
-        		bo.title,
-        		bo.content,
-        		bo.hit,
-        		to_char(bo.eg_date, 'YYYY-MM-DD HH24:MI:SS') regdate,
-        		bo.user_no as userno,
-        		us.name name
-		from board bo left join users us
-		on bo.user_no = us.no
-		where bo.no = #{no}
+		select  bo1.no,
+        bo1.title,
+        bo1.content,
+        bo1.hit,
+        to_char(bo1.regdate, 'YYYY-MM-DD HH24:MI:SS') regdate,
+        bo1.user_no as userno,
+        us.name name
+		from board1 bo1 left join users us
+		on bo1.user_no = us.no
+		where bo1.no = #{no}
 		]]>
 	</select>
 	
 	<!-- 조회수 증가 -->
 	<update id="updateHit" parameterType="int">
 		<![CDATA[
-			update board
+			update board1
 			set hit = hit+1
 			where no = #{no}
 		]]>
@@ -46,8 +47,8 @@
 	<!-- 글 등록 -->
 	<insert id="insert" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			insert into board 
-			values (seq_board_no.nextval, 
+			insert into board1
+			values (seq_board1_no.nextval, 
 					#{title}, 
 					#{content}, 
 					default, 
@@ -60,7 +61,7 @@
 	<!-- 글 수정 -->
 	<update id="updatePost" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
-			update board
+			update board1
 			set title = #{title},
     			content = #{content}
 			where no = #{no}
@@ -70,7 +71,7 @@
 	<!-- 글 삭제 -->
 	<delete id="delete" parameterType="int">
 		<![CDATA[
-			delete board
+			delete board1
 			where no = #{no}
 		]]>
 	</delete>

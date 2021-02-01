@@ -38,13 +38,14 @@ public class BoardService {
 	}
 
 	// http://localhost:8088/mysite5/board/post
-	// 글읽기
-	public String read(Model model) {
-		System.out.println("boardread");
-		int no;
-		model.addAttribute("post", boardService.read(model));
+	// 글읽기-->카운트증가
+	public BoardVo read(int no) {
+		System.out.println("Service_boardread");
+		
 
-		return "board/read";
+		BoardVo count = boardDao.selectPost(no);
+		
+		return count;
 	}
 
 	//http:localhost:8088/mysite5/board/savePost

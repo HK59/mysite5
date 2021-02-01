@@ -69,7 +69,7 @@
 									<td class="text-left"><a href="${pageContext.request.contextPath }/board/read?no=${boardVo.no }">${boardVo.title}</a></td>
 									<td>${boardVo.name}</td>
 									<td>${boardVo.hit}</td>
-									<td>${boardVo.regDate}</td>
+									<td>${boardVo.regdate}</td>
 									<td>
 										<c:if test="${boardVo.userno == authUser.no }">
 											<a href="${pageContext.request.contextPath }/board/remove?no=${boardVo.no }">[삭제]</a>
