@@ -78,7 +78,7 @@
 	
 	
 	<!-- 특정 글 번호에 대한 글 정보를 조회 -->
-	<select id ="selectArticle" resultType ="articleVo" parameterType ="int">
+	<select id ="selectArticle" resultType ="com.javaex.vo.BoardVo" parameterType ="int">
 		<![CDATA[
 		select from board1
 		where user_no = #{user_no}
