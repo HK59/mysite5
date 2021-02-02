@@ -94,7 +94,7 @@ public class BoardController {
 			
 			boardService.remove(no);
 			
-			return "redirect:/board/postedList";
+			return "redirect:/board/getList";
 		}
 	}
 
