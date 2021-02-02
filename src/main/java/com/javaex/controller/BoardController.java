@@ -83,7 +83,7 @@ public class BoardController {
 			
 			boardService.updatePost(boardVo);
 			
-			return "redirect:/board/list";
+			return "redirect:/board/getlist";
 		}
 		
 	//http:localhost:8088/mysite5/board/remove
