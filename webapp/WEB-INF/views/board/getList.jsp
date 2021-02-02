@@ -63,6 +63,37 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tbody>
+						
+								<%-- 리스트 출력 --%>
+								<%
+									if (list != null && paging != null) {
+										for (int i = 0; i < list.length; i++) {
+								%>
+						
+								<tr>
+									<td style="width: 60%">
+										<!-- 게시물 제목, 답글에 대한 인덴트 적용 --> <%
+											if (list[i].getBdIndent() > 0) {
+													for (int j = 0; j < list[i].getBdIndent(); j++) {
+										%> &nbsp&nbsp&nbsp&nbsp <%
+											}
+										%> └ re:&nbsp <%
+											}
+										%> <a class="text-reset"
+										href="board/requestBdCont?requestBdNum=<%=list[i].getBdNum()%>">
+											<%=list[i].getBdTitle()%></a>
+									</td>
+									<!-- 작성자, 작성일, 조회수 -->
+									<td style="width: 10%" class="text-center"><%=list[i].getBdUserID()%></td>
+									<td style="width: 20%" class="text-center"><%=list[i].getBdDate()%></td>
+									<td style="width: 10%" class="text-center"><%=list[i].getBdViewCount()%></td>
+								</tr>
+						
+								<%
+									}
+								%>
+							
 							<c:forEach items="${boardList}" var="boardVo">
 								<tr>
 									<td>${boardVo.no }</td>
@@ -81,23 +112,23 @@
 					</table>
 		
 					<div id="paging">
-						<ul>
-							<li><a href="">◀</a></li>
-							<li><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-							<li class="active"><a href="">5</a></li>
-							<li><a href="">6</a></li>
-							<li><a href="">7</a></li>
-							<li><a href="">8</a></li>
-							<li><a href="">9</a></li>
-							<li><a href="">10</a></li>
-							<li><a href="">▶</a></li>
-						</ul>
-						
-						
-						<div class="clear"></div>
+					<!-- 페이징 목록 처리 -->
+					<p class="text-center">
+					
+						<%
+							for (int i = paging[0]; i <= paging[1]; i++) {
+						%>
+					
+						<a class="text-reset" href="/boardChat?requestedPage=<%=i%>"><%=i%></a>&nbsp&nbsp
+					
+						<%
+							}
+						%>
+					</p>
+					
+											
+											
+					<div class="clear"></div>
 					</div>
 					<c:if test="${authUser != null}">
 						<a id="btn_write" href="${pageContext.request.contextPath }/board/writeForm">글쓰기</a>
