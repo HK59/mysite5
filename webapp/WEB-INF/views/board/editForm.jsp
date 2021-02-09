@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -78,13 +78,13 @@
 						<!-- 내용 -->
 						<div class="form-group">
 							<textarea id="txt-content">여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.
-여기에는 본문내용이 출력됩니다.</textarea>
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.
+														여기에는 본문내용이 출력됩니다.</textarea>
 						</div>
 						
 						<a id="btn_cancel" href="">취소</a>

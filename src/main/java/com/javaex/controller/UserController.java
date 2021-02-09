@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.dao.UserDao;
 import com.javaex.service.UserService;
@@ -32,6 +34,27 @@ public class UserController {
 
 	}
 
+	// 회원가입 - 아이디 체크
+	@RequestMapping(value = "/idCheck", method = { RequestMethod.GET, RequestMethod.POST })
+	public String idCheck(@RequestParam("id")String id) {
+		System.out.println("/user/idCheck");
+		System.out.println("check = " + id);
+		
+		String userVo = userService.idcheck(id);
+		System.out.println("controller " +userVo);
+		
+		String result = "" ;
+		if(userVo==null) {
+			//사용 할 수 있는 아이디 : 회원가입가능
+			result = "can";
+		}else {
+		 // 사용할 수 없는 아이디 
+			result = "cannot";
+		}
+		return "redirect:/user/joinForm?result=";
+
+	}
+	
 	// 회원가입
 	@RequestMapping(value = "/join", method = { RequestMethod.GET, RequestMethod.POST })
 	public String join(@ModelAttribute UserVo userVo) {
@@ -110,4 +133,23 @@ public class UserController {
 
 		return "redirect:/"; // 메인으로 갔을때 이름 변경되어야함
 	}
+	
+	//회원가입 - 아이디 체크
+		@ResponseBody
+		@RequestMapping(value = "/idcheck", method = { RequestMethod.GET, RequestMethod.POST })
+		public String idcheck(@RequestParam("id") String id, @RequestParam("password") String password) { //@ModelAttribute
+			//패스워드는 테스트용 코드 추가한것임
+			
+			System.out.println("/user/idcheck");
+			System.out.println("chekid = " + id);
+			System.out.println("password = " + password);  
+			
+			String result = userService.idcheck(id);
+			
+			System.out.println(result);
+			
+			return result;   //@RespnoseBody --> response 의 body 영역에 data만 보낸다 (retrun 값)
+			
+		}
+		
 }

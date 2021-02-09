@@ -75,6 +75,15 @@
 								placeholder="아이디를 입력하세요">
 							<button type="button" id="">중복체크</button>
 						</div>
+						
+						<p>
+							<c:if test= "${param.result == 'can'}">
+							 가입할 수 있는 ID입니다. 
+							</c:if>
+							<c:if test = "${param.result == 'cannot'}">
+							가입할 수 없는 ID입니다.
+							</c:if>
+						</p>
 
 						<!-- 비밀번호 -->
 						<div class="form-group">

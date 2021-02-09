@@ -53,6 +53,12 @@ public class UserDao {
 			return sqlSession.update("user.modify", userVo);
 		}
 		
+		//회원가입 id체크
+		public UserVo selectOne(String id) {
+			System.out.println("user dao selectOne " + id);
+			return sqlSession.selectOne("user.selectById", id);
+			
+		}
 
 }
 	
