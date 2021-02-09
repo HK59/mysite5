@@ -17,35 +17,39 @@ public class GuestService {
 
 	@Autowired
 	private GuestDao guestDao;
+	
+	@Autowired
+	private GuestVo guestVo;
 
 	SqlSession sqlSession;
 
 	// List
-	public String list(Model model) {
-		List<GuestVo> guestList = guestDao.getList();
-		model.addAttribute("guestList", guestList);
-
-		return "list";
+	public List<GuestVo> getList(){
+		System.out.println("[guestService] getList()");
+		
+		return guestDao.selectList();
 	}
 
-	// addList
-	public String addList(@ModelAttribute GuestVo guestVo) {
+	// addList (글 저장)
+	public int addList(GuestVo guestVo) {
 
-		guestDao.GuestInsert(guestVo);
-
-		return "redirect:/guest/list";
+		System.out.println("[guestbookService] add()");
+		
+		return guestDao.GuestInsert(guestVo);
 	}
 
 	// Delete
-	public String delete(@PathVariable("password") GuestVo password) {
+	public int delete(@PathVariable("password") GuestVo password) {
 	GuestDao guestDao = new GuestDao();
 	guestDao.guestDelete(password);
 
-	return"redirect:/guest/list";
+	
+	return guestDao.guestDelete(guestVo);
 			
 			}
+	
 	/* ajax 글저장-->저장된 글 리턴 */
-	public void writeResultVo(GuestVo guestVo) {
+	public GuestVo writeResultVo(GuestVo guestVo) {
 		//글저장-->번호
 		
 		//int no = guestDao.insertSelectKey(guestbookVo);
@@ -54,8 +58,9 @@ public class GuestService {
 		int no =guestVo.getNo(); 
 		
 		//글 1개 가져오기 
-		GuestVo vo = guestDao.selectOne(no);
-		System.out.println(vo);
+		GuestVo Gvo = guestDao.selectOne(no);
+		System.out.println(Gvo);
+		return Gvo;
 		
 	}
 	

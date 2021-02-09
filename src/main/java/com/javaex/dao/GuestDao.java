@@ -14,14 +14,11 @@ public class GuestDao {
 	@Autowired // 자동으로 연결해 달라고
 	private SqlSession sqlSession;
 
-	public List<GuestVo> getList(){
-		System.out.println("Dao : getList");
+	public List<GuestVo> selectList() {
+		System.out.println("[guestDao] selectList()");
+		return sqlSession.selectList("guestbook.selectList");
 		
-		List<GuestVo> guestList = sqlSession.selectList("guestbook.selectList");
 		
-		System.out.println("Dao : guestList"+guestList);
-		
-		return guestList;
 	}
 	
 	// 방명록 등록
@@ -37,13 +34,13 @@ public class GuestDao {
 	 
 	 }
 	 /* 글 저장(selectkey) */
-		public int insertSelectKey(GuestVo guestVo) {
+		public void insertSelectKey(GuestVo guestVo) {
 			System.out.println("[guestDao] insertSelectKey()");
 			
 			System.out.println("xml실행전-->" + guestVo);
 			sqlSession.insert("guestbook.insertSelectKey", guestVo);
 			System.out.println("xml실행후-->" + guestVo);
-			return guestVo.getNo();
+			
 		}
 		
 		/* 글 1개 가져오기 */
